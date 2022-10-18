@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
@@ -10,14 +10,23 @@ namespace Processing
 
         private readonly string ConnectionString = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Battery;Integrated Security=True";
         private readonly string SQL = "SELECT * FROM Daemon ORDER BY [TimeStamp]";
+        private readonly string SQL2 = "SELECT TOP (3600) * FROM Daemon ORDER BY [TimeStamp] DESC";
+
         public SqlConnection _conn;
 
         public BatteryUtils() {
             _conn = new(ConnectionString);
         }
 
-        public Dictionary<string, List<long>> GetData() {
-            SqlDataAdapter sda = new(SQL, _conn);
+        public Dictionary<string, List<long>> GetData(int ID) {
+            string _sql;
+
+            if (ID == 1) {
+                _sql = SQL;
+            } else {
+                _sql = SQL2;
+            }
+            SqlDataAdapter sda = new(_sql, _conn);
             DataTable dt = new();
 
             try {
@@ -36,16 +45,25 @@ namespace Processing
                 var dd = dataRow.ItemArray;
                 if (null != dd) {
                     time.Add((long)dd[0]);
-                    status.Add((int)dd[1]);
+                    status.Add((int)dd[1] - 1);
                     cap.Add((int)dd[2]);
                 }
             }
             Dictionary<string, List<long>> cout = new() {
                 ["TimeStamp"] = time,
-                ["CurrentLevel"] = status,
-                ["BatteryStatus"] = status
+                ["CurrentLevel"] = cap,
+                ["BatteryStatus"] = status,
             };
-            return cout;
+            if (ID == 1) {
+                return cout;
+            } else {
+                Dictionary<string, List<long>> cout2 = new() {
+                    ["TimeStamp"] = Enumerable.Reverse(time).ToList(),
+                    ["CurrentLevel"] = Enumerable.Reverse(cap).ToList(),
+                    ["BatteryStatus"] = Enumerable.Reverse(status).ToList(),
+                };
+                return cout2;
+            }
         }
 
         //TODO
@@ -116,7 +134,7 @@ namespace Processing
                     l = timestamp[i];
                 }
                 if ((Toggled) && (plugged[i] == 1)) {
-                    count += 1;
+                    count++;
                 } else if ((Toggled) && ((plugged[i] != 1) || (i + 1 == ns))) {
                     r = timestamp[i - 1];
                     if (count > 0) {
@@ -161,9 +179,9 @@ namespace Processing
                     }
                     index++;
                 }
-                var timestamp = _timestamp.Skip(l).Take(r - l).ToList();
-                var levels = _levels.Skip(l).Take(r - l).ToList();
-                int ns = timestamp.Count();
+                var timestamp = _timestamp.Skip(l).Take(r - l + 1).ToList();
+                var levels = _levels.Skip(l).Take(r - l + 1).ToList();
+                int ns = timestamp.Count;
                 if (levels.Max() < 100) {
                     cout["SpotCount"]++;
                 } else {
@@ -187,7 +205,7 @@ namespace Processing
                         }
                     }
                     if (g > 1800) { // 30 mins = 30 * 60 secs
-                        cout["SpotCount"]++;
+                        cout["BadCount"]++;
                     } else {
                         cout["OptimalCount"]++;
                     }
