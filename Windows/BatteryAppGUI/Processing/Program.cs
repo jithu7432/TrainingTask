@@ -1,31 +1,35 @@
-﻿using System.ComponentModel;
-using BatteryAppGUI;
+﻿using BatteryAppGUI;
 
 namespace Processing
 {
-    public class Program
+    public class Processed
     {
-        //public static void Main() {
+        public int _optimalCount { get; set; }
+        public int _badCount { get; set; }
+        public int _spotCount { get; set; }
 
-        //    var b = new BatteryUtils();
-        //    var df2 = b.GetData(2);
+        public string _drop { get; set; }
+        public double _time { get; set; }
 
-        //    var res = b.ComputeDecrement(df2);
 
-        //    foreach (var x in res) {
-        //        Console.WriteLine(x);
-        //    }
+        public Processed() {
 
-        //    Console.WriteLine();
-        //    var df = b.GetData(1);
-        //    var res2 = BatteryUtils.CalculateChargingBounds(df);
+            var b = new BatteryUtils();
+            var df1 = b.GetData(1);
+            var df2 = b.GetData(2);
 
-        //    var res3 = BatteryUtils.ClassifyCounts(df, res2);
+            var res1 = BatteryUtils.ComputeDecrement(df2);
+            var res2 = BatteryUtils.CalculateChargingBounds(df1);
+            var res3 = BatteryUtils.ClassifyCounts(df1, res2);
 
-        //    foreach (var x in res3) {
-        //        Console.WriteLine(x);
-        //    }
-        //}
+            _drop = $"{res1["Drop"]}";
+            _time = (double)res1["Time"];
+
+            _optimalCount = res3["OptimalCount"];
+            _badCount = res3["BadCount"];
+            _spotCount = res3["SpotCount"];
+
+        }
 
     }
 

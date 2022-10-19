@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Runtime.InteropServices;
 
 namespace BatteryAppGUI;
 
@@ -43,27 +41,27 @@ public class BatteryUtils
 
         foreach (DataRow dataRow in dt.Rows) {
             var dd = dataRow.ItemArray;
-            // TODO: Raising null exception
-            //time.Add((long)dd[0]);
-            //status.Add((int)dd[1] - 1);
-            //cap.Add((int)dd[2]);
+        //TODO: Raising null exception
+            time.Add((long)dd[0]);
+            status.Add((int)dd[1] - 1);
+            cap.Add((int)dd[2]);
 
             // null checks
-            if (!(dd == null)) {
-                int i = 0;
-                foreach (var x in dd) {
-                    if (x != null) {
-                        if ((i == 0)) {
-                            time.Add((long)x);
-                        } else if ((i == 1)) {
-                            status.Add((int)x - 1);
-                        } else {
-                            cap.Add((int)x - 1);
-                        }
+            //if (!(dd == null)) {
+            //    int i = 0;
+            //    foreach (var x in dd) {
+            //        if (x != null) {
+            //            if ((i == 0)) {
+            //                time.Add((long)x);
+            //            } else if ((i == 1)) {
+            //                status.Add((int)x - 1);
+            //            } else {
+            //                cap.Add((int)x - 1);
+            //            }
 
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
 
         }
         Dictionary<string, List<long>> cout = new() {
