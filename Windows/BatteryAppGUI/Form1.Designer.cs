@@ -1,16 +1,9 @@
 ﻿namespace BatteryAppGUI 
 {
-    partial class Form1 
+    partial class MainWindow 
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing) {
             if (disposing && (components != null)) {
                 components.Dispose();
@@ -18,28 +11,23 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent() {
-            this.headerlabel = new System.Windows.Forms.Label();
-            this.lheader = new System.Windows.Forms.Label();
+            this._badlabel = new System.Windows.Forms.Label();
             this._droplabel = new System.Windows.Forms.Label();
-            this._timelabel = new System.Windows.Forms.Label();
             this._optimallabel = new System.Windows.Forms.Label();
             this._spotlabel = new System.Windows.Forms.Label();
-            this._badlabel = new System.Windows.Forms.Label();
-            this.spotlabel = new System.Windows.Forms.Label();
-            this.optimallabel = new System.Windows.Forms.Label();
+            this._timelabel = new System.Windows.Forms.Label();
             this.badlabel = new System.Windows.Forms.Label();
-            this.droplabel = new System.Windows.Forms.Label();
-            this.timelabel = new System.Windows.Forms.Label();
             this.clearbutton = new System.Windows.Forms.Button();
             this.cookbutton = new System.Windows.Forms.Button();
+            this.droplabel = new System.Windows.Forms.Label();
+            this.headerlabel = new System.Windows.Forms.Label();
+            this.lheader = new System.Windows.Forms.Label();
+            this.optimallabel = new System.Windows.Forms.Label();
+            this.spotlabel = new System.Windows.Forms.Label();
+            this.timelabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
+
             // 
             // headerlabel
             // 
@@ -186,33 +174,33 @@
             this.cookbutton.Click += new System.EventHandler(this.Cookbutton_Click);
             this.cookbutton.Enter += new System.EventHandler(this.Cookbutton_Click);
             // 
-            // Form1
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Controls.Add(this.cookbutton);
-            this.Controls.Add(this.clearbutton);
-            this.Controls.Add(this.timelabel);
-            this.Controls.Add(this.droplabel);
+            this.Controls.Add(this._badlabel);
+            this.Controls.Add(this._droplabel);
+            this.Controls.Add(this._optimallabel);
+            this.Controls.Add(this._spotlabel);
+            this.Controls.Add(this._timelabel);
             this.Controls.Add(this.badlabel);
+            this.Controls.Add(this.clearbutton);
+            this.Controls.Add(this.cookbutton);
+            this.Controls.Add(this.droplabel);
+            this.Controls.Add(this.headerlabel);
+            this.Controls.Add(this.lheader);
             this.Controls.Add(this.optimallabel);
             this.Controls.Add(this.spotlabel);
-            this.Controls.Add(this._badlabel);
-            this.Controls.Add(this._spotlabel);
-            this.Controls.Add(this._optimallabel);
-            this.Controls.Add(this._timelabel);
-            this.Controls.Add(this._droplabel);
-            this.Controls.Add(this.lheader);
-            this.Controls.Add(this.headerlabel);
+            this.Controls.Add(this.timelabel);
             this.Font = new System.Drawing.Font("Arial Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximumSize = new System.Drawing.Size(800, 500);
             this.MinimumSize = new System.Drawing.Size(800, 500);
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.Text = "BatteryApp";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
@@ -222,19 +210,19 @@
 
         #endregion
 
-        private Label headerlabel;
-        private Label lheader;
-        private Label _droplabel;
-        private Label _timelabel;
-        private Label _optimallabel;
-        private Label _spotlabel;
-        private Label _badlabel;
-        private Label spotlabel;
-        private Label optimallabel;
-        private Label badlabel;
-        private Label droplabel;
-        private Label timelabel;
         private Button clearbutton;
         private Button cookbutton;
+        private Label _badlabel;
+        private Label _droplabel;
+        private Label _optimallabel;
+        private Label _spotlabel;
+        private Label _timelabel;
+        private Label badlabel;
+        private Label droplabel;
+        private Label headerlabel;
+        private Label lheader;
+        private Label optimallabel;
+        private Label spotlabel;
+        private Label timelabel;
     }
 }

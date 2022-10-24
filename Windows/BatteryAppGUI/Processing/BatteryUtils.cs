@@ -18,12 +18,12 @@ public class BatteryUtils
 
     public Dictionary<string, List<long>> GetData(int ID) {
         string _sql;
-
-        if (ID == 1) {
-            _sql = SQL;
-        } else {
-            _sql = SQL2;
-        }
+        // if (ID == 1) {
+        //     _sql = SQL;
+        // } else {
+        //     _sql = SQL2;
+        // }
+        _sql = ID == 1 : SQL ? SQL2
         SqlDataAdapter sda = new(_sql, _conn);
         DataTable dt = new();
 
@@ -41,28 +41,9 @@ public class BatteryUtils
 
         foreach (DataRow dataRow in dt.Rows) {
             var dd = dataRow.ItemArray;
-        //TODO: Raising null exception
             time.Add((long)dd[0]);
             status.Add((int)dd[1] - 1);
             cap.Add((int)dd[2]);
-
-            // null checks
-            //if (!(dd == null)) {
-            //    int i = 0;
-            //    foreach (var x in dd) {
-            //        if (x != null) {
-            //            if ((i == 0)) {
-            //                time.Add((long)x);
-            //            } else if ((i == 1)) {
-            //                status.Add((int)x - 1);
-            //            } else {
-            //                cap.Add((int)x - 1);
-            //            }
-
-            //        }
-            //    }
-            //}
-
         }
         Dictionary<string, List<long>> cout = new() {
             ["TimeStamp"] = time,
@@ -79,16 +60,6 @@ public class BatteryUtils
             };
             return cout2;
         }
-    }
-
-    //TODO
-    public static void PreProcess() {
-
-    }
-
-    //TODO
-    public static void PreProcessMinute() {
-
     }
 
     public static Dictionary<string, long> ComputeDecrement(Dictionary<string, List<long>> df) {
@@ -129,19 +100,17 @@ public class BatteryUtils
 
     }
 
-    //def calculate_charging_bounds(df: pd.DataFrame) -> list[dict[str, int]]:
-
     public static List<Dictionary<string, long>> CalculateChargingBounds(Dictionary<string, List<long>> df) {
         var plugged = df["BatteryStatus"];
         var timestamp = df["TimeStamp"];
 
-        int ns = plugged.Count;
+        int i = 0;
         int count = 0;
-        var cout = new List<Dictionary<string, long>>();
+        int ns = plugged.Count;
         bool Toggled = false;
         long r = 0;
         long l = 0;
-        int i = 0;
+        var cout = new List<Dictionary<string, long>>();
 
         while (i < ns) {
             if ((!Toggled) && (plugged[i] == 1)) {
@@ -220,7 +189,7 @@ public class BatteryUtils
                         }
                     }
                 }
-                if (g > 1800) { // 30 mins = 30 * 60 secs
+                if (g > 1800) { // 1800 = 30 mins * 60 secs/min
                     cout["BadCount"]++;
                 } else {
                     cout["OptimalCount"]++;
