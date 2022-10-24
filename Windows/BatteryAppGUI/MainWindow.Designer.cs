@@ -11,6 +11,7 @@
             base.Dispose(disposing);
         }
 
+        #region Windows Form Designer generated code
         private void InitializeComponent() {
             this._badlabel = new System.Windows.Forms.Label();
             this._droplabel = new System.Windows.Forms.Label();
@@ -135,7 +136,7 @@
             // 
             this.droplabel.AutoSize = true;
             this.droplabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.droplabel.Location = new System.Drawing.Point(99, 190);
+            this.droplabel.Location = new System.Drawing.Point(120, 190);
             this.droplabel.Name = "droplabel";
             this.droplabel.Size = new System.Drawing.Size(97, 28);
             this.droplabel.TabIndex = 11;
@@ -145,7 +146,7 @@
             // 
             this.timelabel.AutoSize = true;
             this.timelabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.timelabel.Location = new System.Drawing.Point(99, 246);
+            this.timelabel.Location = new System.Drawing.Point(120, 246);
             this.timelabel.Name = "timelabel";
             this.timelabel.Size = new System.Drawing.Size(97, 28);
             this.timelabel.TabIndex = 12;

@@ -17,13 +17,10 @@ public class BatteryUtils
     }
 
     public Dictionary<string, List<long>> GetData(int ID) {
-        string _sql;
-        // if (ID == 1) {
-        //     _sql = SQL;
-        // } else {
-        //     _sql = SQL2;
-        // }
-        _sql = ID == 1 : SQL ? SQL2
+        string _sql = SQL;
+        if (ID == 2) {
+            _sql = SQL2;
+        }
         SqlDataAdapter sda = new(_sql, _conn);
         DataTable dt = new();
 
@@ -35,6 +32,7 @@ public class BatteryUtils
         } finally {
             _conn.Close();
         }
+
         List<long> time = new();
         List<long> status = new();
         List<long> cap = new();
@@ -88,7 +86,10 @@ public class BatteryUtils
             long[] prev = cout[j - 1];
             if (prev[0] > curr[0]) {
                 drop += (int)(prev[0] - curr[0]);
-                times += (curr[1] - prev[1]);
+                var _diff = (curr[1] - prev[1]);
+                if(_diff < 3600){
+                    times += _diff;
+                }
             }
             j++;
         }
