@@ -1,32 +1,119 @@
 package com.jithin.batteryapp
 
-import java.util.Date
+import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
 import java.text.DateFormat.getDateTimeInstance
+import java.util.*
 
 class DataCooking(_database: DatabaseHandler) {
-    private val database = _database
+    private lateinit var batteryList: MutableList<BatteryInstant>
+    private var _db: DatabaseHandler = _database
     private var badCount: Int = 0
     private var optimalCount: Int = 0
     private var spotCount: Int = 0
     private var drop: Int = 0
     private var timeTaken: Int = 0
-    private var timeframe: String = ""
-    private var lastUpdated: String = getDateTimeInstance().format(Date())
+    private lateinit var timeframe: String
+    private lateinit var lastUpdated: String
 
-    private fun getChargingData() {
-        this.badCount++
-        this.optimalCount++
-        this.spotCount++
+
+    private fun cookChargingData() {
+        // BadCount & Optimal Count O(N)
+        var count = 0
+        for (i in 1 until this.batteryList.size) {
+            val current = this.batteryList[i]
+            if ((current.plugged == 1) && (current.currentLevel > 99)) {
+                count++
+            } else {
+                if (count > 0) {
+                    if (count > 30) this.badCount++ else this.optimalCount++
+                    count = 0
+                }
+            }
+        }
+        // Device is still plugged in
+        if (count > 0) if (count > 30) this.badCount++ else this.optimalCount++
+
+        // SpotCount O(N)
+        count = 0
+        for (i in 1 until this.batteryList.size) {
+            val current = this.batteryList[i]
+            if ((current.plugged == 1) && current.currentLevel < 100) {
+                count++
+            } else {
+                if (count > 0) this.spotCount++
+                count = 0
+            }
+        }
     }
 
-    private fun getDischargingData() {
-        this.timeTaken++
-        this.drop++
+    private fun sourceValues() {
+        this.drop = 0
+        this.badCount = 0
+        this.spotCount = 0
+        this.timeTaken = 0
+        this.optimalCount = 0
+        this.batteryList = this._db.getData()
+    }
+
+    private fun getBoundsForTheHour(): List<Long> {
+        val format = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.US)
+        // HH:00:00.000
+        format.calendar.set(Calendar.MINUTE, 0)
+        format.calendar.set(Calendar.SECOND, 0)
+        format.calendar.set(Calendar.MILLISECOND, 0)
+        val leftBound = format.calendar.timeInMillis
+        // HH:59:59.999
+        format.calendar.set(Calendar.MINUTE, 59)
+        format.calendar.set(Calendar.SECOND, 59)
+        format.calendar.set(Calendar.MILLISECOND, 999)
+        val rightBound = format.calendar.timeInMillis
+        return listOf(leftBound, rightBound)
+    }
+
+    private fun convertLongToTime(time: Long): String {
+        val date = Date(time)
+        val format = SimpleDateFormat("hh:mm", Locale.US)
+        return format.format(date)
+    }
+
+    private fun setTimeframe(bounds: List<Long>) {
+        this.timeframe = "${convertLongToTime(bounds[0])} - ${convertLongToTime(bounds[1])}"
+    }
+
+
+    private fun cookDischargingData() {
+        val bounds = getBoundsForTheHour()
+        this.setTimeframe(bounds)
+        // Finding the starting point.
+        var j = 0
+        while (this.batteryList[j].timestamp < bounds[0]) {
+            j++
+        }
+        var previous = this.batteryList[j]
+        for (i in j until this.batteryList.size) {
+            val current = this.batteryList[i]
+            if (current.currentLevel < previous.currentLevel) {
+                this.drop++
+                this.timeTaken++
+            }
+            previous = current
+        }
     }
 
     fun getCookedData(): List<String> {
-        this.getChargingData()
-        this.getDischargingData()
-        return listOf("$badCount", "$optimalCount", "$spotCount", "$drop %", "$timeTaken second(s)", timeframe, lastUpdated)
+        this.sourceValues()
+        this.cookDischargingData()
+        this.cookChargingData()
+        this.lastUpdated = getDateTimeInstance().format(Date())
+        return listOf(
+            this.badCount.toString(),
+            this.optimalCount.toString(),
+            this.spotCount.toString(),
+            "${this.drop} %",
+            "${this.timeTaken} second (s)",
+            this.timeframe,
+            this.lastUpdated
+        )
     }
 }

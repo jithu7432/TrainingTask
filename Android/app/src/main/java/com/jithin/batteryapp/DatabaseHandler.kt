@@ -2,11 +2,8 @@ package com.jithin.batteryapp
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
-import kotlin.system.exitProcess
 
 
 class DatabaseHandler(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLiteOpenHelper(context, "BatteryApp", factory, 1) {
@@ -35,23 +32,23 @@ class DatabaseHandler(context: Context, factory: SQLiteDatabase.CursorFactory?) 
         db.close()
     }
 
-    fun getCursor(): Cursor? {
+    fun getData(): MutableList<BatteryInstant> {
         val db = this.writableDatabase
-        return db.rawQuery("SELECT * FROM $sqlTable", null)
-    }
+        val cursor = db.rawQuery(/* sql = */ "SELECT * FROM $sqlTable", /* selectionArgs = */ null)
 
-    fun getData() {
-        val cursor = this.getCursor()
-        var i = 0
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                var plugged = cursor.getString(cursor.getColumnIndex("Plugged") ?: 1)
-                var level = cursor.getString(cursor.getColumnIndex("CurrentLevel") ?: 1)
-                var timestamp = cursor.getString(cursor.getColumnIndex("TimeStamp") ?: 1)
-                println(listOf(i, level, plugged, timestamp.toLong() / 1000))
-                i++
-            }
-            cursor.close();
+        val batteryList: MutableList<BatteryInstant> = mutableListOf<BatteryInstant>(BatteryInstant(1, 1, 1))
+        if (cursor == null) {
+            throw NullPointerException("Cursor is null!")
         }
+        while (cursor.moveToNext()) {
+            val plugged = cursor.getString(cursor.getColumnIndex("Plugged") ?: 0).toInt()
+            val currentLevel = cursor.getString(cursor.getColumnIndex("CurrentLevel") ?: 1).toInt()
+            val timestamp = cursor.getString(cursor.getColumnIndex("TimeStamp") ?: 2).toLong()
+            val battery = BatteryInstant(timestamp, currentLevel, plugged)
+            batteryList.add(battery)
+        }
+        cursor.close();
+        db.close()
+        return batteryList
     }
 }

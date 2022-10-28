@@ -5,15 +5,15 @@ plugins {
 
 android {
     namespace 'com.jithin.batteryapp'
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.jithin.batteryapp"
         minSdk 29
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
-
+        targetSdk 31
+        versionCode 2
+        versionName "2.0"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,6 +30,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildToolsVersion '30.0.3'
 }
 
 dependencies {

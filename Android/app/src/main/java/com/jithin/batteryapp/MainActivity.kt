@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         // Button Listeners
 
         val database = DatabaseHandler(this, null)
-        val curs = database.getData()
         val cookedData = DataCooking(database)
+
         clearButton.setOnClickListener { updateTableValues(valueView, null) }
         cookButton.setOnClickListener { updateTableValues(valueView, cookedData.getCookedData()) }
 

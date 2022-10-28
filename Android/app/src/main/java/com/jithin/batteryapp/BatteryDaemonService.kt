@@ -10,7 +10,7 @@ class BatteryDaemonService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         onTaskRemoved(intent)
         val batteryManager: BatteryManager = applicationContext.getSystemService(BATTERY_SERVICE) as BatteryManager
-        val battery = Battery(batteryManager)
+        val battery = BatteryAdapter(batteryManager)
         val database = DatabaseHandler(this, null)
         database.appendData(battery.timestamp, battery.currentLevel, battery.plugged)
         TimeUnit.SECONDS.sleep(1)
