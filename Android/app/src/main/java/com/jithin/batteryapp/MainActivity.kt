@@ -1,40 +1,53 @@
 package com.jithin.batteryapp
 
-import android.os.BatteryManager
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.ListView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.database.getStringOrNull
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //service
+        val serviceIntent: Intent = Intent(this, BatteryDaemonService::class.java)
 
-        val cookButton = findViewById<Button>(R.id.btn_cook)
+        //Views
         val clearButton = findViewById<Button>(R.id.btn_clear)
+        val cookButton = findViewById<Button>(R.id.btn_cook)
+        val propertyView = findViewById<ListView>(R.id.lv_property)
+        val valueView = findViewById<ListView>(R.id.lv_value)
 
-        val textView = findViewById<TextView>(R.id.textView)
+        // Button Listeners
 
-        val batteryManager: BatteryManager = applicationContext.getSystemService(BATTERY_SERVICE) as BatteryManager
-        fun getCurrentLevel(): Int {
-            return batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
-        }
-        fun getTimeStamp(): Long {
-            return System.currentTimeMillis() / 1000
-        }
+        val database = DatabaseHandler(this, null)
+        val curs = database.getData()
+        val cookedData = DataCooking(database)
+        clearButton.setOnClickListener { updateTableValues(valueView, null) }
+        cookButton.setOnClickListener { updateTableValues(valueView, cookedData.getCookedData()) }
 
-        cookButton.setOnClickListener{
-            var string = "${getCurrentLevel()} at ${getTimeStamp()}"
-            textView.text = string
-        }
+        // Starting service
+        startService(serviceIntent)
+        // Populating the table
+        populateProperties(propertyView)
+        // Initializing all values with N/A
+        updateTableValues(valueView, null)
+    }
 
-        clearButton.setOnClickListener{
-            var string = "${getCurrentLevel()} at ${getTimeStamp()}"
-            textView.text = "@+string/appname"
+    private fun updateTableValues(listview: ListView, values: List<String>?) {
+        val propertyNames: List<String> = values ?: List(7) { "NA" }
+        val arrayAdapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, propertyNames)
+        listview.adapter = arrayAdapter
+    }
 
-        }
+    private fun populateProperties(listview: ListView) {
+        val propertyNames = listOf("Bad Count", "Optimal Count", "Spot Count", "Dropped %", "Time Consumed", "Time Frame", "Last Updated")
+        val arrayAdapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, propertyNames)
+        listview.adapter = arrayAdapter
     }
 }
+
