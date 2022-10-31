@@ -8,6 +8,7 @@ class BatteryAdapter(batteryManager: BatteryManager) {
     val timestamp: Long = System.currentTimeMillis()
 }
 
+// Represents each row of the database.
 data class BatteryInstant(
     val timestamp: Long,
     val currentLevel: Int,

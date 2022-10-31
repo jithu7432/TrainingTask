@@ -15,9 +15,8 @@ class DataCooking(_database: DatabaseHandler) {
     private lateinit var timeframe: String
     private lateinit var lastUpdated: String
 
-
     private fun cookChargingData() {
-        // BadCount & Optimal Count O(N)
+        // BadCount & Optimal Count O(N) && Θ(1)
         var count = 0
         for (i in 1 until this.batteryList.size) {
             val current = this.batteryList[i]
@@ -25,15 +24,15 @@ class DataCooking(_database: DatabaseHandler) {
                 count++
             } else {
                 if (count > 0) {
-                    if (count > 30) this.badCount++ else this.optimalCount++
+                    if (count > 1800) this.badCount++ else this.optimalCount++
                     count = 0
                 }
             }
         }
         // Device is still plugged in
-        if (count > 0) if (count > 30) this.badCount++ else this.optimalCount++
+        if (count > 0) if (count > 1800) this.badCount++ else this.optimalCount++
 
-        // SpotCount O(N)
+        // SpotCount O(N) & Θ(1)
         count = 0
         for (i in 1 until this.batteryList.size) {
             val current = this.batteryList[i]
@@ -84,6 +83,7 @@ class DataCooking(_database: DatabaseHandler) {
     private fun cookDischargingData() {
         val bounds = getBoundsForTheHour()
         this.setTimeframe(bounds)
+
         // Finding the starting point.
         var j = 0
         while (this.batteryList[j].timestamp < bounds[0]) {
@@ -91,7 +91,7 @@ class DataCooking(_database: DatabaseHandler) {
         }
         var previous = this.batteryList[j]
         var toggled = false
-        // Computing drop and time_taken O(N)
+        // Computing drop and time_taken O(N) Θ(1)
         for (i in j until this.batteryList.size) {
             val current = this.batteryList[i]
             if (current.currentLevel < previous.currentLevel) {
