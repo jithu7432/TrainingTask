@@ -173,7 +173,7 @@
             this.cookbutton.Text = "Cook";
             this.cookbutton.UseVisualStyleBackColor = true;
             this.cookbutton.Click += new System.EventHandler(this.Cookbutton_Click);
-            this.cookbutton.Enter += new System.EventHandler(this.Cookbutton_Click);
+
             // 
             // MainWindow
             // 
