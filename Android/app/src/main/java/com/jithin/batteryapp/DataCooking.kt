@@ -1,6 +1,5 @@
 package com.jithin.batteryapp
 
-import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat
 import java.text.DateFormat.getDateTimeInstance
 import java.util.*
@@ -91,10 +90,18 @@ class DataCooking(_database: DatabaseHandler) {
             j++
         }
         var previous = this.batteryList[j]
+        var toggled = false
+        // Computing drop and time_taken O(N)
         for (i in j until this.batteryList.size) {
             val current = this.batteryList[i]
             if (current.currentLevel < previous.currentLevel) {
-                this.drop++
+                toggled = true
+            }
+            else if(current.currentLevel > previous.currentLevel){
+                toggled = false
+            }
+            if(toggled){
+                this.drop += (previous.currentLevel - current.currentLevel)
                 this.timeTaken++
             }
             previous = current
@@ -111,7 +118,7 @@ class DataCooking(_database: DatabaseHandler) {
             this.optimalCount.toString(),
             this.spotCount.toString(),
             "${this.drop} %",
-            "${this.timeTaken} second (s)",
+            "%.2f minute(s)".format(this.timeTaken.toDouble() / 60.toDouble()),
             this.timeframe,
             this.lastUpdated
         )
