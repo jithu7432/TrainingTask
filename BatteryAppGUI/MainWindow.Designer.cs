@@ -13,22 +13,47 @@
 
         #region Windows Form Designer generated code
         private void InitializeComponent() {
-            this._badlabel = new System.Windows.Forms.Label();
-            this._droplabel = new System.Windows.Forms.Label();
-            this._optimallabel = new System.Windows.Forms.Label();
-            this._spotlabel = new System.Windows.Forms.Label();
-            this._timelabel = new System.Windows.Forms.Label();
-            this.badlabel = new System.Windows.Forms.Label();
             this.clearbutton = new System.Windows.Forms.Button();
             this.cookbutton = new System.Windows.Forms.Button();
-            this.droplabel = new System.Windows.Forms.Label();
             this.headerlabel = new System.Windows.Forms.Label();
-            this.lheader = new System.Windows.Forms.Label();
-            this.optimallabel = new System.Windows.Forms.Label();
+            this.last_update_val_label = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.updatelabel = new System.Windows.Forms.Label();
+            this.badlabel = new System.Windows.Forms.Label();
             this.spotlabel = new System.Windows.Forms.Label();
+            this.optimallabel = new System.Windows.Forms.Label();
+            this.droplabel = new System.Windows.Forms.Label();
             this.timelabel = new System.Windows.Forms.Label();
+            this.framelabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
-
+            // 
+            // clearbutton
+            // 
+            this.clearbutton.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.clearbutton.Location = new System.Drawing.Point(391, 614);
+            this.clearbutton.Name = "clearbutton";
+            this.clearbutton.Size = new System.Drawing.Size(144, 47);
+            this.clearbutton.TabIndex = 13;
+            this.clearbutton.Text = "Clear";
+            this.clearbutton.UseVisualStyleBackColor = true;
+            this.clearbutton.Click += new System.EventHandler(this.Clearbutton_Click);
+            // 
+            // cookbutton
+            // 
+            this.cookbutton.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cookbutton.Location = new System.Drawing.Point(241, 614);
+            this.cookbutton.Name = "cookbutton";
+            this.cookbutton.Size = new System.Drawing.Size(144, 47);
+            this.cookbutton.TabIndex = 14;
+            this.cookbutton.Text = "Cook";
+            this.cookbutton.UseVisualStyleBackColor = true;
+            this.cookbutton.Click += new System.EventHandler(this.Cookbutton_Click);
             // 
             // headerlabel
             // 
@@ -42,138 +67,152 @@
             this.headerlabel.TabIndex = 0;
             this.headerlabel.Text = "Battery Satistics";
             // 
-            // lheader
+            // last_update_val_label
             // 
-            this.lheader.AutoSize = true;
-            this.lheader.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lheader.Location = new System.Drawing.Point(33, 140);
-            this.lheader.Name = "lheader";
-            this.lheader.Size = new System.Drawing.Size(268, 29);
-            this.lheader.TabIndex = 1;
-            this.lheader.Text = "*Past 1 hour of usage*";
+            this.last_update_val_label.Location = new System.Drawing.Point(0, 0);
+            this.last_update_val_label.Name = "last_update_val_label";
+            this.last_update_val_label.Size = new System.Drawing.Size(100, 23);
+            this.last_update_val_label.TabIndex = 0;
             // 
-            // _droplabel
+            // label1
             // 
-            this._droplabel.AutoSize = true;
-            this._droplabel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this._droplabel.Location = new System.Drawing.Point(33, 191);
-            this._droplabel.Name = "_droplabel";
-            this._droplabel.Size = new System.Drawing.Size(83, 29);
-            this._droplabel.TabIndex = 3;
-            this._droplabel.Text = "Drop: ";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(152, 155);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(239, 35);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Last Updated: ";
             // 
-            // _timelabel
+            // label2
             // 
-            this._timelabel.AutoSize = true;
-            this._timelabel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this._timelabel.Location = new System.Drawing.Point(33, 246);
-            this._timelabel.Name = "_timelabel";
-            this._timelabel.Size = new System.Drawing.Size(83, 29);
-            this._timelabel.TabIndex = 4;
-            this._timelabel.Text = "Time: ";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(168, 214);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(191, 35);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Bad Count: ";
             // 
-            // _optimallabel
+            // label3
             // 
-            this._optimallabel.AutoSize = true;
-            this._optimallabel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this._optimallabel.Location = new System.Drawing.Point(467, 192);
-            this._optimallabel.Name = "_optimallabel";
-            this._optimallabel.Size = new System.Drawing.Size(186, 29);
-            this._optimallabel.TabIndex = 5;
-            this._optimallabel.Text = "Optimal Count:";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(168, 270);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(191, 35);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Spot Count:";
             // 
-            // _spotlabel
+            // label4
             // 
-            this._spotlabel.AutoSize = true;
-            this._spotlabel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this._spotlabel.Location = new System.Drawing.Point(502, 140);
-            this._spotlabel.Name = "_spotlabel";
-            this._spotlabel.Size = new System.Drawing.Size(151, 29);
-            this._spotlabel.TabIndex = 6;
-            this._spotlabel.Text = "Spot Count:\r\n";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(152, 325);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(255, 35);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Optimal Count: ";
             // 
-            // _badlabel
+            // label5
             // 
-            this._badlabel.AutoSize = true;
-            this._badlabel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this._badlabel.Location = new System.Drawing.Point(511, 245);
-            this._badlabel.Name = "_badlabel";
-            this._badlabel.Size = new System.Drawing.Size(142, 29);
-            this._badlabel.TabIndex = 7;
-            this._badlabel.Text = "Bad Count:";
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(241, 371);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(111, 35);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Drop: ";
             // 
-            // spotlabel
+            // label6
             // 
-            this.spotlabel.AutoSize = true;
-            this.spotlabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.spotlabel.Location = new System.Drawing.Point(659, 140);
-            this.spotlabel.Name = "spotlabel";
-            this.spotlabel.Size = new System.Drawing.Size(83, 28);
-            this.spotlabel.TabIndex = 8;
-            this.spotlabel.Text = "label7";
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(184, 423);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(207, 35);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Time Taken: ";
             // 
-            // optimallabel
+            // label7
             // 
-            this.optimallabel.AutoSize = true;
-            this.optimallabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.optimallabel.Location = new System.Drawing.Point(659, 192);
-            this.optimallabel.Name = "optimallabel";
-            this.optimallabel.Size = new System.Drawing.Size(83, 28);
-            this.optimallabel.TabIndex = 9;
-            this.optimallabel.Text = "label8";
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(184, 477);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(207, 35);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Time Frame: ";
+            // 
+            // updatelabel
+            // 
+            this.updatelabel.AutoSize = true;
+            this.updatelabel.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.updatelabel.Location = new System.Drawing.Point(411, 155);
+            this.updatelabel.Name = "updatelabel";
+            this.updatelabel.Size = new System.Drawing.Size(111, 35);
+            this.updatelabel.TabIndex = 22;
+            this.updatelabel.Text = "label8";
             // 
             // badlabel
             // 
             this.badlabel.AutoSize = true;
-            this.badlabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.badlabel.Location = new System.Drawing.Point(659, 245);
+            this.badlabel.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.badlabel.Location = new System.Drawing.Point(411, 212);
             this.badlabel.Name = "badlabel";
-            this.badlabel.Size = new System.Drawing.Size(83, 28);
-            this.badlabel.TabIndex = 10;
+            this.badlabel.Size = new System.Drawing.Size(111, 35);
+            this.badlabel.TabIndex = 23;
             this.badlabel.Text = "label9";
+            // 
+            // spotlabel
+            // 
+            this.spotlabel.AutoSize = true;
+            this.spotlabel.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.spotlabel.Location = new System.Drawing.Point(411, 270);
+            this.spotlabel.Name = "spotlabel";
+            this.spotlabel.Size = new System.Drawing.Size(127, 35);
+            this.spotlabel.TabIndex = 24;
+            this.spotlabel.Text = "label10";
+            // 
+            // optimallabel
+            // 
+            this.optimallabel.AutoSize = true;
+            this.optimallabel.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.optimallabel.Location = new System.Drawing.Point(411, 325);
+            this.optimallabel.Name = "optimallabel";
+            this.optimallabel.Size = new System.Drawing.Size(127, 35);
+            this.optimallabel.TabIndex = 25;
+            this.optimallabel.Text = "label11";
             // 
             // droplabel
             // 
             this.droplabel.AutoSize = true;
-            this.droplabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.droplabel.Location = new System.Drawing.Point(120, 190);
+            this.droplabel.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.droplabel.Location = new System.Drawing.Point(411, 371);
             this.droplabel.Name = "droplabel";
-            this.droplabel.Size = new System.Drawing.Size(97, 28);
-            this.droplabel.TabIndex = 11;
-            this.droplabel.Text = "label10";
+            this.droplabel.Size = new System.Drawing.Size(127, 35);
+            this.droplabel.TabIndex = 26;
+            this.droplabel.Text = "label12";
             // 
             // timelabel
             // 
             this.timelabel.AutoSize = true;
-            this.timelabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.timelabel.Location = new System.Drawing.Point(120, 246);
+            this.timelabel.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.timelabel.Location = new System.Drawing.Point(411, 423);
             this.timelabel.Name = "timelabel";
-            this.timelabel.Size = new System.Drawing.Size(97, 28);
-            this.timelabel.TabIndex = 12;
-            this.timelabel.Text = "label11";
+            this.timelabel.Size = new System.Drawing.Size(127, 35);
+            this.timelabel.TabIndex = 27;
+            this.timelabel.Text = "label13";
             // 
-            // clearbutton
+            // framelabel
             // 
-            this.clearbutton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.clearbutton.Location = new System.Drawing.Point(303, 368);
-            this.clearbutton.Name = "clearbutton";
-            this.clearbutton.Size = new System.Drawing.Size(144, 47);
-            this.clearbutton.TabIndex = 13;
-            this.clearbutton.Text = "Clear";
-            this.clearbutton.UseVisualStyleBackColor = true;
-            this.clearbutton.Click += new System.EventHandler(this.Clearbutton_Click);
-            // 
-            // cookbutton
-            // 
-            this.cookbutton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cookbutton.Location = new System.Drawing.Point(303, 315);
-            this.cookbutton.Name = "cookbutton";
-            this.cookbutton.Size = new System.Drawing.Size(144, 47);
-            this.cookbutton.TabIndex = 14;
-            this.cookbutton.Text = "Cook";
-            this.cookbutton.UseVisualStyleBackColor = true;
-            this.cookbutton.Click += new System.EventHandler(this.Cookbutton_Click);
-
+            this.framelabel.AutoSize = true;
+            this.framelabel.Font = new System.Drawing.Font("Cascadia Mono", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.framelabel.Location = new System.Drawing.Point(411, 477);
+            this.framelabel.Name = "framelabel";
+            this.framelabel.Size = new System.Drawing.Size(127, 35);
+            this.framelabel.TabIndex = 28;
+            this.framelabel.Text = "label14";
             // 
             // MainWindow
             // 
@@ -181,28 +220,30 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Controls.Add(this._badlabel);
-            this.Controls.Add(this._droplabel);
-            this.Controls.Add(this._optimallabel);
-            this.Controls.Add(this._spotlabel);
-            this.Controls.Add(this._timelabel);
-            this.Controls.Add(this.badlabel);
-            this.Controls.Add(this.clearbutton);
-            this.Controls.Add(this.cookbutton);
+            this.ClientSize = new System.Drawing.Size(795, 776);
+            this.Controls.Add(this.framelabel);
+            this.Controls.Add(this.timelabel);
             this.Controls.Add(this.droplabel);
-            this.Controls.Add(this.headerlabel);
-            this.Controls.Add(this.lheader);
             this.Controls.Add(this.optimallabel);
             this.Controls.Add(this.spotlabel);
-            this.Controls.Add(this.timelabel);
+            this.Controls.Add(this.badlabel);
+            this.Controls.Add(this.updatelabel);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.clearbutton);
+            this.Controls.Add(this.cookbutton);
+            this.Controls.Add(this.headerlabel);
             this.Font = new System.Drawing.Font("Arial Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximumSize = new System.Drawing.Size(800, 500);
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "MainWindow";
-            this.Text = "BatteryApp";
+            this.Text = ":w";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -213,17 +254,21 @@
 
         private Button clearbutton;
         private Button cookbutton;
-        private Label _badlabel;
-        private Label _droplabel;
-        private Label _optimallabel;
-        private Label _spotlabel;
-        private Label _timelabel;
-        private Label badlabel;
-        private Label droplabel;
         private Label headerlabel;
-        private Label lheader;
-        private Label optimallabel;
+        private Label last_update_val_label;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private Label updatelabel;
+        private Label badlabel;
         private Label spotlabel;
+        private Label optimallabel;
+        private Label droplabel;
         private Label timelabel;
+        private Label framelabel;
     }
 }

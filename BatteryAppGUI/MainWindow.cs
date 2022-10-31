@@ -16,14 +16,8 @@ namespace BatteryAppGUI
         }
 
         private void Main_Load(object sender, EventArgs e) {
-            //WipeAllFields("N/A");
+            WipeAllFields("N/A");
 
-            var result = new DataProcessing();
-            optimallabel.Text = $"{result.OptimalCount}";
-            badlabel.Text = $"{result.BadCount}";
-            spotlabel.Text = $"{result.SpotCount}";
-            droplabel.Text = $"{result.Drop} %";
-            timelabel.Text = $"{(result.Time / 60):0.##} mins";
         }
 
         private void Cookbutton_Click(object sender, EventArgs e) {
@@ -32,13 +26,14 @@ namespace BatteryAppGUI
             badlabel.Text = $"{result.BadCount}";
             spotlabel.Text = $"{result.SpotCount}";
             droplabel.Text = $"{result.Drop} %";
-            timelabel.Text = $"{(result.Time / 60):0.##} mins";
+            timelabel.Text = $"{(result.Time / 60):0.##} minute(s)";
+            updatelabel.Text = $"{result.Lastupdated}";
+            framelabel.Text = $"{result.Timeframe[0]} -> {result.Timeframe[1]}";
 
         }
 
         private void Clearbutton_Click(object sender, EventArgs e) {
             WipeAllFields("N/A");
-
         }
         private void WipeAllFields(string arg) {
             optimallabel.Text = arg;
@@ -46,9 +41,8 @@ namespace BatteryAppGUI
             spotlabel.Text = arg;
             droplabel.Text = arg;
             timelabel.Text = arg;
-
+            updatelabel.Text = arg;
+            framelabel.Text = arg;
         }
-
-
     }
 }

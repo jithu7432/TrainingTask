@@ -1,23 +1,23 @@
 ﻿using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace BatteryAppGUI;
 
 public class BatteryUtils
 {
 
-    private readonly string ConnectionString = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Battery;Integrated Security=True";
+    //private readonly string ConnectionString = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Battery;Integrated Security=True";
     private readonly string SQL_Discharging = "SELECT * FROM Daemon ORDER BY [TimeStamp]";
-    private readonly string SQL_Charging = "SELECT TOP (3600) * FROM Daemon ORDER BY [TimeStamp] DESC";
+    private readonly string DatabasePath = "../BatteryDaemon.sqlite";
 
-    public SqlConnection _connection;
+    public SQLiteConnection _connection;
 
     public BatteryUtils() {
-        _connection = new(ConnectionString);
+        _connection = new($"Data Source={DatabasePath};Version=3;", true);
     }
 
     public DataTable GetChargingData() {
-        SqlDataAdapter sql_adapter = new(SQL_Charging, _connection);
+        SQLiteDataAdapter sql_adapter = new(SQL_Discharging, _connection);
         DataTable data_table = new();
         try {
             _connection.Open();
@@ -32,21 +32,21 @@ public class BatteryUtils
 
     }
 
-    public DataTable GetDischargeData() {
-        SqlDataAdapter sql_adapter = new(SQL_Discharging, _connection);
-        DataTable data_table = new();
+    //public DataTable GetDischargeData() {
+    //    SQLiteDataAdapter sql_adapter = new(SQL_Discharging, _connection);
+    //    DataTable data_table = new();
 
-        try {
-            _connection.Open();
-            sql_adapter.Fill(data_table);
-        } catch (Exception e) {
-            throw new Exception(e.Message);
-        } finally {
-            _connection.Close();
-        }
+    //    try {
+    //        _connection.Open();
+    //        sql_adapter.Fill(data_table);
+    //    } catch (Exception e) {
+    //        throw new Exception(e.Message);
+    //    } finally {
+    //        _connection.Close();
+    //    }
 
-        return data_table;
-    }
+    //    return data_table;
+    //}
 }
 
 //List<long> time = new();
